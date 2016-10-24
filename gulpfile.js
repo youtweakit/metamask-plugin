@@ -150,6 +150,7 @@ const jsFiles = [
   'contentscript',
   'background',
   'popup',
+  'libp2p',
 ]
 
 var jsDevStrings = jsFiles.map(jsFile => `dev:js:${jsFile}`)
