@@ -17,7 +17,8 @@
     "buildMock": "browserify ./mock-dev.js -o ./development/bundle.js",
     "testem": "npm run buildMock && testem",
     "ci": "npm run buildMock && npm run buildCiUnits && testem ci -P 2",
-    "announce": "node development/announcer.js"
+    "announce": "node development/announcer.js",
+    "generateNotice": "node development/notice-generator.js"
   },
   "browserify": {
     "transform": [
