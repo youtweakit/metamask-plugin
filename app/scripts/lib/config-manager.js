@@ -3,7 +3,9 @@ const MetamaskConfig = require('../config.js')
 const migrations = require('./migrations')
 const rp = require('request-promise')
 const ethUtil = require('ethereumjs-util')
+const extend = require('xtend')
 const normalize = require('./sig-util').normalize
+const notices = require('../../development/notices.json')
 
 const TESTNET_RPC = MetamaskConfig.network.testnet
 const MAINNET_RPC = MetamaskConfig.network.mainnet
@@ -195,6 +197,41 @@ ConfigManager.prototype.getCurrentRpcAddress = function () {
 ConfigManager.prototype.setData = function (data) {
   this.migrator.saveData(data)
 }
+
+//
+// Notices
+//
+
+ConfigManager.prototype.getNoticesList = function () {
+  var data = this.getData()
+  return ('noticesList' in data) && data.noticesList
+}
+
+ConfigManager.prototype.setNoticesList = function (list) {
+  var data = this.getData()
+  data.noticesList = list
+  this.setData(data)
+}
+
+ConfigManager.prototype.markNoticeRead = function(id) {
+  var notices = this.getNoticesList()
+  notices[id].read = true
+  this.setNoticesList(notices)
+}
+
+ConfigManager.prototype.updateNoticesList = function () {
+  this._retrieveNoticeData().then((newNotices) => {
+    var oldNotices = this.getNoticesList()
+    var combinedNotices = extend(newNotices, oldNotices)
+    this.setNoticesList(combinedNotices)
+  })
+}
+
+ConfigManager.prototype._retrieveNoticeData = function () {
+  // Placeholder for the API.
+  return Promise.resolve(notices)
+}
+
 
 //
 // Tx
