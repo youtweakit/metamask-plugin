@@ -213,8 +213,9 @@ ConfigManager.prototype.setNoticesList = function (list) {
   this.setData(data)
 }
 
-ConfigManager.prototype.markNoticeRead = function(id) {
+ConfigManager.prototype.markNoticeRead = function(notice) {
   var notices = this.getNoticesList()
+  var id = notice.id
   notices[id].read = true
   this.setNoticesList(notices)
 }
@@ -225,6 +226,13 @@ ConfigManager.prototype.updateNoticesList = function () {
     var combinedNotices = extend(newNotices, oldNotices)
     this.setNoticesList(combinedNotices)
   })
+}
+
+ConfigManager.prototype.getLatestUnreadNotice = function () {
+  var notices = this.getNoticesList()
+  return notices.filter((notice) => {
+    notice.read === false
+  })[0]
 }
 
 ConfigManager.prototype._retrieveNoticeData = function () {

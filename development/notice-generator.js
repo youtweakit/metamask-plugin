@@ -19,13 +19,13 @@ prompt.start()
 prompt.get(['title'], function (err, result) {
   fs.writeFile(`notices/notice_${id}.md`, `# ${result.title}\n### ${date}\n\n[Message Goes Here]\n`)
     .then(() =>  {
-      var newNotice = {}
-      newNotice[id] = {
+      var newNotice = {
+        id: id,
         read: false,
         title: result.title,
       }
-      var combinedNotices = extend(notices, newNotice)
-      return fs.writeFile(`development/notices.json`, JSON.stringify(combinedNotices))
+      notices.push(newNotice)
+      return fs.writeFile(`development/notices.json`, JSON.stringify(notices))
     }).then((err) => {
       open(`notices/notice_${id}.md`)
       return Promise.resolve()
