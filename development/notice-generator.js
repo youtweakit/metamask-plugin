@@ -29,5 +29,7 @@ prompt.get(['title'], function (err, result) {
     }).then((err) => {
       open(`notices/notice_${id}.md`)
       return Promise.resolve()
+    }).catch(err) => {
+      return console.err(err)
     })
 })
