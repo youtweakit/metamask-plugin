@@ -205,7 +205,7 @@ ConfigManager.prototype.getNoticesList = function () {
   var data = this.getData()
   if ('noticesList' in data) {
     return data.noticesList
-  } else  {
+  } else {
     return []
   }
 }
@@ -217,7 +217,7 @@ ConfigManager.prototype.setNoticesList = function (list) {
   return Promise.resolve(true)
 }
 
-ConfigManager.prototype.markNoticeRead = function(notice) {
+ConfigManager.prototype.markNoticeRead = function (notice) {
   var notices = this.getNoticesList()
   var id = notice.id
   notices[id].read = true
@@ -225,7 +225,7 @@ ConfigManager.prototype.markNoticeRead = function(notice) {
 }
 
 ConfigManager.prototype.updateNoticesList = function () {
-  return this._retrieveNoticeData().then( (newNotices) => {
+  return this._retrieveNoticeData().then((newNotices) => {
     var oldNotices = this.getNoticesList()
     var combinedNotices = this._mergeNotices(oldNotices, newNotices)
     return Promise.resolve(this.setNoticesList(combinedNotices))
@@ -250,7 +250,7 @@ ConfigManager.prototype._mergeNotices = function (oldNotices, newNotices) {
   return oldNotices
 }
 
-ConfigManager.prototype._mapNoticeIds = function(notices) {
+ConfigManager.prototype._mapNoticeIds = function (notices) {
   return notices.map((notice) => notice.id)
 }
 

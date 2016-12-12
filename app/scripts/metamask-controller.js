@@ -296,7 +296,7 @@ module.exports = class MetamaskController {
 
   checkNotices () {
     try {
-      const notices = this.configManager.updateNoticesList()
+      this.configManager.updateNoticesList()
     } catch (e) {
       console.error('Error in checking notices.')
     }

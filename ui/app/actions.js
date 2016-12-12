@@ -555,12 +555,15 @@ function markNoticeRead (notice) {
     dispatch(this.showLoadingIndication())
     background.markNoticeRead(notice, (err, notice) => {
       dispatch(this.hideLoadingIndication())
+      if (err) {
+        return dispatch(actions.showWarning(err))
+      }
       if (notice) {
         return dispatch(actions.showNotice(notice))
       } else {
         dispatch(this.clearNotices())
         return {
-          type: actions.SHOW_ACCOUNTS_PAGE
+          type: actions.SHOW_ACCOUNTS_PAGE,
         }
       }
     })

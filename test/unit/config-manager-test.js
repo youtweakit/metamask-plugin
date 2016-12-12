@@ -23,7 +23,7 @@ describe('config-manager', function() {
           title:"Futuristic Notice"
         }]
         var result = configManager.getNoticesList()
-        assert.equal(result, [])
+        assert.equal(result.length, 0)
       })
     })
 
