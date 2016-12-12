@@ -2,6 +2,7 @@ const extend = require('xtend')
 const EthStore = require('eth-store')
 const MetaMaskProvider = require('web3-provider-engine/zero.js')
 const KeyringController = require('./keyring-controller')
+const NoticeController = require('./notice-controller')
 const messageManager = require('./lib/message-manager')
 const HostStore = require('./lib/remote-store.js').HostStore
 const Web3 = require('web3')
@@ -22,6 +23,9 @@ module.exports = class MetamaskController {
       configManager: this.configManager,
       getNetwork: this.getStateNetwork.bind(this),
     })
+    this.noticeController = new NoticeController({
+      configManager: this.configManager,
+    })
     this.provider = this.initializeProvider(opts)
     this.ethStore = new EthStore(this.provider)
     this.keyringController.setStore(this.ethStore)
@@ -33,6 +37,7 @@ module.exports = class MetamaskController {
     this.configManager.setCurrentFiat(currentFiat)
     this.configManager.updateConversionRate()
 
+    this.checkNotices()
     this.checkTOSChange()
 
     this.scheduleConversionInterval()
@@ -43,7 +48,8 @@ module.exports = class MetamaskController {
       this.state,
       this.ethStore.getState(),
       this.configManager.getConfig(),
-      this.keyringController.getState()
+      this.keyringController.getState(),
+      this.noticeController.getState()
     )
   }
 
@@ -60,6 +66,7 @@ module.exports = class MetamaskController {
       setCurrentFiat: this.setCurrentFiat.bind(this),
       setTOSHash: this.setTOSHash.bind(this),
       checkTOSChange: this.checkTOSChange.bind(this),
+      checkNotices: this.checkNotices.bind(this),
       setGasMultiplier: this.setGasMultiplier.bind(this),
 
       // forward directly to keyringController
@@ -85,6 +92,8 @@ module.exports = class MetamaskController {
       buyEth: this.buyEth.bind(this),
       // shapeshift
       createShapeShiftTx: this.createShapeShiftTx.bind(this),
+      // notices
+      markNoticeRead: this.markNoticeRead.bind(this),
     }
   }
 
@@ -282,6 +291,25 @@ module.exports = class MetamaskController {
       }
     } catch (e) {
       console.error('Error in checking TOS change.')
+    }
+  }
+
+  checkNotices () {
+    try {
+      const notices = this.configManager.updateNoticesList()
+    } catch (e) {
+      console.error('Error in checking notices.')
+    }
+  }
+
+  // notice
+
+  markNoticeRead (notice, cb) {
+    try {
+      this.configManager.markNoticeRead(notice)
+      cb(null, this.configManager.getLatestUnreadNotice())
+    } catch (e) {
+      cb(e)
     }
   }
 

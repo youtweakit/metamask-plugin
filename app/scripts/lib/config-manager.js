@@ -203,7 +203,11 @@ ConfigManager.prototype.setData = function (data) {
 
 ConfigManager.prototype.getNoticesList = function () {
   var data = this.getData()
-  return ('noticesList' in data) && data.noticesList
+  if ('noticesList' in data) {
+    return data.noticesList
+  } else  {
+    return []
+  }
 }
 
 ConfigManager.prototype.setNoticesList = function (list) {

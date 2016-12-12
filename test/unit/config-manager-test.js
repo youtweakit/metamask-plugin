@@ -16,14 +16,14 @@ describe('config-manager', function() {
 
   describe('notices', function() {
     describe('#getNoticesList', function() {
-      it('should return false when new', function() {
+      it('should return an empty array when new', function() {
         var testList = [{
           id:0,
           read:false,
           title:"Futuristic Notice"
         }]
         var result = configManager.getNoticesList()
-        assert.ok(!result)
+        assert.equal(result, [])
       })
     })
 
