@@ -28,6 +28,7 @@ Notice.prototype.render = function () {
       },
     }, [
       `${props.lastUnreadNotice.title}`,
+      `${props.lastUnreadNotice.body}`,
       h('button', {
         onClick: () => props.dispatch(actions.markNoticeRead(props.lastUnreadNotice)),
       }, 'Mark as Read'),
