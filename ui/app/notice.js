@@ -1,8 +1,10 @@
 const inherits = require('util').inherits
 const Component = require('react').Component
 const h = require('react-hyperscript')
+const ReactMarkdown = require('react-markdown')
 const connect = require('react-redux').connect
 const actions = require('./actions')
+
 
 
 module.exports = connect(mapStateToProps)(Notice)
@@ -28,7 +30,10 @@ Notice.prototype.render = function () {
       },
     }, [
       `${props.lastUnreadNotice.title}`,
-      `${props.lastUnreadNotice.body}`,
+      h(ReactMarkdown, {
+        source: props.lastUnreadNotice.body,
+        skipHtml: true,
+      }),
       h('button', {
         onClick: () => props.dispatch(actions.markNoticeRead(props.lastUnreadNotice)),
       }, 'Mark as Read'),
