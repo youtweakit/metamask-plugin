@@ -41,6 +41,7 @@ module.exports = class MetamaskController {
     this.checkTOSChange()
 
     this.scheduleConversionInterval()
+    this.scheduleNoticeCheck()
   }
 
   getState () {
@@ -352,6 +353,15 @@ module.exports = class MetamaskController {
     }
     this.conversionInterval = setInterval(() => {
       this.configManager.updateConversionRate()
+    }, 300000)
+  }
+
+  scheduleNoticeCheck () {
+    if (this.noticeCheck) {
+      clearInterval(this.noticeCheck)
+    }
+    this.noticeCheck = setInterval(() => {
+      this.configManager.updateNoticesList()
     }, 300000)
   }
 
