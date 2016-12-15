@@ -6,6 +6,8 @@ const actions = require('../actions')
 const ReactMarkdown = require('react-markdown')
 const fs = require('fs')
 const path = require('path')
+const linker = require('extension-link-enabler')
+const findDOMNode = require('react-dom').findDOMNode
 const disclaimer = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'USER_AGREEMENT.md')).toString()
 module.exports = connect(mapStateToProps)(DisclaimerScreen)
 
@@ -103,4 +105,14 @@ DisclaimerScreen.prototype.render = function () {
       }, disabled ? 'Scroll Down to Enable' : 'I Agree'),
     ])
   )
+}
+
+DisclaimerScreen.prototype.componentDidMount = function () {
+  var node = findDOMNode(this)
+  linker.setupListener(node)
+}
+
+DisclaimerScreen.prototype.componentWillUnmount = function () {
+  var node = findDOMNode(this)
+  linker.teardownListener(node)
 }
