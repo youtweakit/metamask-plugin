@@ -117,7 +117,6 @@ App.prototype.renderAppBar = function () {
           alignItems: 'center',
           visibility: props.isUnlocked ? 'visible' : 'none',
           background: props.isUnlocked ? 'white' : 'none',
-          height: '36px',
           position: 'relative',
           zIndex: 2,
         },
@@ -130,14 +129,6 @@ App.prototype.renderAppBar = function () {
             alignItems: 'center',
           },
         }, [
-
-          // mini logo
-          h('img', {
-            height: 24,
-            width: 24,
-            src: '/images/icon-128.png',
-          }),
-
           h(NetworkIndicator, {
             network: this.props.network,
             provider: this.props.provider,
@@ -152,8 +143,9 @@ App.prototype.renderAppBar = function () {
         // metamask name
         h('h1', {
           style: {
-            position: 'relative',
-            left: '9px',
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
           },
         }, 'MetaMask'),
 
