@@ -4,8 +4,8 @@ const h = require('react-hyperscript')
 const ReactMarkdown = require('react-markdown')
 const connect = require('react-redux').connect
 const actions = require('./actions')
-
-
+const linker = require('../lib/linker')
+const findDOMNode = require('react-dom').findDOMNode
 
 module.exports = connect(mapStateToProps)(Notice)
 
@@ -22,7 +22,6 @@ function Notice () {
 
 Notice.prototype.render = function () {
   const props = this.props
-  const body = props.lastUnreadNotice.body
   const title = props.lastUnreadNotice.title
 
   return (
@@ -88,9 +87,19 @@ Notice.prototype.render = function () {
       h('button', {
         onClick: () => props.dispatch(actions.markNoticeRead(props.lastUnreadNotice)),
         style: {
-          marginTop: '18px'
-        }
+          marginTop: '18px',
+        },
       }, 'Continue'),
     ])
   )
+}
+
+Notice.prototype.componentDidMount = function () {
+  var node = findDOMNode(this)
+  linker.setupListener(node)
+}
+
+Notice.prototype.componentWillUnmount = function () {
+  var node = findDOMNode(this)
+  linker.teardownListener(node)
 }
