@@ -22,21 +22,75 @@ function Notice () {
 
 Notice.prototype.render = function () {
   const props = this.props
+  const body = props.lastUnreadNotice.body
+  const title = props.lastUnreadNotice.title
 
   return (
-    h('div', {
-      style: {
-        background: 'white',
-      },
-    }, [
-      `${props.lastUnreadNotice.title}`,
-      h(ReactMarkdown, {
-        source: props.lastUnreadNotice.body,
-        skipHtml: true,
-      }),
+    h('.flex-column.flex-center.flex-grow', [
+      h('h3.flex-center.text-transform-uppercacse.terms-header', {
+        style: {
+          background: '#EBEBEB',
+          color: '#AEAEAE',
+          marginBottom: 24,
+          width: '100%',
+          fontSize: '20px',
+          textAlign: 'center',
+          padding: 6,
+        },
+      }, [
+        title,
+      ]),
+
+      h('style', `
+
+        .markdown {
+          overflow-x: hidden;
+        }
+        .markdown h1, .markdown h2, .markdown h3 {
+          margin: 10px 0;
+          font-weight: bold;
+        }
+
+        .markdown strong {
+          font-weight: bold;
+        }
+        .markdown em {
+          font-style: italic;
+        }
+
+        .markdown p {
+          margin: 10px 0;
+        }
+
+        .markdown a {
+          color: blue;
+        }
+
+      `),
+
+      h('div.markdown', {
+        style: {
+          background: 'rgb(235, 235, 235)',
+          height: '310px',
+          padding: '6px',
+          width: '90%',
+          overflowY: 'scroll',
+          scroll: 'auto',
+        },
+      }, [
+        `${props.lastUnreadNotice.title}`,
+        h(ReactMarkdown, {
+          source: props.lastUnreadNotice.body,
+          skipHtml: true,
+        }),
+      ]),
+
       h('button', {
         onClick: () => props.dispatch(actions.markNoticeRead(props.lastUnreadNotice)),
-      }, 'Mark as Read'),
+        style: {
+          marginTop: '18px'
+        }
+      }, 'Continue'),
     ])
   )
 }
