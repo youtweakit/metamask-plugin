@@ -10,5 +10,5 @@
  * https://developer.mozilla.org/en-US/Add-ons/WebExtensions
  */
 
-const Extension = require('./extension-instance')
+const extension = require('extensionizer')
 module.exports = new Extension()

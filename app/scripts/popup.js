@@ -3,7 +3,7 @@ const MetaMaskUiCss = require('../../ui/css')
 const startPopup = require('./popup-core')
 const PortStream = require('./lib/port-stream.js')
 const isPopupOrNotification = require('./lib/is-popup-or-notification')
-const extension = require('./lib/extension')
+const extension = require('extensionizer')
 const notification = require('./lib/notifications')
 
 var css = MetaMaskUiCss()

@@ -21,7 +21,7 @@ const actions = require('./ui/app/actions')
 const states = require('./development/states')
 const Selector = require('./development/selector')
 const MetamaskController = require('./app/scripts/metamask-controller')
-const extension = require('./development/mockExtension')
+const extension = require('extensionizer')
 
 // Query String
 const qs = require('qs')
@@ -157,4 +157,3 @@ render(
 
   ]
 ), container)
-

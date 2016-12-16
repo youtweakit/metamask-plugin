@@ -8,7 +8,7 @@ const notification = require('../app/scripts/lib/notifications.js')
 const messageManager = require('../app/scripts/lib/message-manager')
 const setupMultiplex = require('../app/scripts/lib/stream-utils.js').setupMultiplex
 const MetamaskController = require('../app/scripts/metamask-controller')
-const extension = require('../app/scripts/lib/extension')
+const extension = require('extensionizer')
 
 const STORAGE_KEY = 'metamask-config'
 

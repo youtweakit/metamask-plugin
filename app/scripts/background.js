@@ -7,7 +7,7 @@ const notification = require('./lib/notifications.js')
 const messageManager = require('./lib/message-manager')
 const setupMultiplex = require('./lib/stream-utils.js').setupMultiplex
 const MetamaskController = require('./metamask-controller')
-const extension = require('./lib/extension')
+const extension = require('extensionizer')
 
 const STORAGE_KEY = 'metamask-config'
 const METAMASK_DEBUG = 'GULP_METAMASK_DEBUG'
