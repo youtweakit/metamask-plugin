@@ -13,6 +13,7 @@ module.exports = class TransactionManager extends EventEmitter {
     super()
     this.store = new ObservableStore(extend({
       transactions: [],
+      gasMultiplier: 1,
     }, opts.initState))
     this.memStore = new ObservableStore({})
     this.networkStore = opts.networkStore || new ObservableStore({})
@@ -49,6 +50,14 @@ module.exports = class TransactionManager extends EventEmitter {
     let network = this.getNetwork()
     let fullTxList = this.store.getState().transactions
     return fullTxList.filter(txMeta => txMeta.metamaskNetworkId === network)
+  }
+
+  getGasMultiplier () {
+    return this.store.getState().gasMultiplier
+  }
+
+  setGasMultiplier (gasMultiplier) {
+    return this.store.updateState({ gasMultiplier })
   }
 
   // Adds a tx to the txlist
@@ -120,6 +129,7 @@ module.exports = class TransactionManager extends EventEmitter {
           id: txId,
           time: time,
           status: 'unapproved',
+          gasMultiplier: this.getGasMultiplier(),
           metamaskNetworkId: this.getNetwork(),
           txParams: txParams,
         }
@@ -137,15 +147,16 @@ module.exports = class TransactionManager extends EventEmitter {
 
   setMaxTxCostAndFee (txMeta) {
     var txParams = txMeta.txParams
+    var gasMultiplier = txMeta.gasMultiplier
     var gasCost = new BN(ethUtil.stripHexPrefix(txParams.gas || txMeta.estimatedGas), 16)
     var gasPrice = new BN(ethUtil.stripHexPrefix(txParams.gasPrice || '0x4a817c800'), 16)
+    gasPrice = gasPrice.mul(new BN(gasMultiplier * 100), 10).div(new BN(100, 10))
     var txFee = gasCost.mul(gasPrice)
     var txValue = new BN(ethUtil.stripHexPrefix(txParams.value || '0x0'), 16)
     var maxCost = txValue.add(txFee)
     txMeta.txFee = txFee
     txMeta.txValue = txValue
     txMeta.maxCost = maxCost
-    txMeta.gasPrice = gasPrice
     this.updateTx(txMeta)
   }
 
@@ -198,7 +209,7 @@ module.exports = class TransactionManager extends EventEmitter {
     let txMeta = this.getTx(txId)
     let txParams = txMeta.txParams
     let fromAddress = txParams.from
-    let ethTx = this.txProviderUtils.buildEthTxFromParams(txParams)
+    let ethTx = this.txProviderUtils.buildEthTxFromParams(txParams, txMeta.gasMultiplier)
     this.signEthTx(ethTx, fromAddress).then(() => {
       this.setTxStatusSigned(txMeta.id)
       cb(null, ethUtil.bufferToHex(ethTx.serialize()))

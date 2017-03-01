@@ -2,7 +2,6 @@ const Component = require('react').Component
 const h = require('react-hyperscript')
 const inherits = require('util').inherits
 const PendingTxDetails = require('./pending-tx-details')
-const extend = require('xtend')
 
 module.exports = PendingTx
 
@@ -12,9 +11,8 @@ function PendingTx () {
 }
 
 PendingTx.prototype.render = function () {
-  const props = this.props
-  const newProps = extend(props, {ref: 'details'})
-  const txData = props.txData
+  var state = this.props
+  var txData = state.txData
 
   return (
 
@@ -23,7 +21,7 @@ PendingTx.prototype.render = function () {
     }, [
 
       // tx info
-      h(PendingTxDetails, newProps),
+      h(PendingTxDetails, state),
 
       h('style', `
         .conf-buttons button {
@@ -41,7 +39,7 @@ PendingTx.prototype.render = function () {
         }, 'Transaction Error. Exception thrown in contract code.')
       : null,
 
-      props.insufficientBalance ?
+      state.insufficientBalance ?
         h('span.error', {
           style: {
             marginLeft: 50,
@@ -59,26 +57,20 @@ PendingTx.prototype.render = function () {
         },
       }, [
 
-        props.insufficientBalance ?
+        state.insufficientBalance ?
           h('button.btn-green', {
-            onClick: props.buyEth,
+            onClick: state.buyEth,
           }, 'Buy Ether')
         : null,
 
         h('button.confirm', {
-          disabled: props.insufficientBalance,
-          onClick: props.sendTransaction,
+          disabled: state.insufficientBalance,
+          onClick: state.sendTransaction,
         }, 'Accept'),
 
         h('button.cancel.btn-red', {
-          onClick: props.cancelTransaction,
+          onClick: state.cancelTransaction,
         }, 'Reject'),
-
-        h('button', {
-          onClick: () => {
-            this.refs.details.resetGasFields()
-          },
-        }, 'Reset'),
       ]),
     ])
   )
