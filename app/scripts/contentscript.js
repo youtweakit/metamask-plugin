@@ -65,7 +65,7 @@ function setupStreams () {
 }
 
 function shouldInjectWeb3 () {
-  return isAllowedSuffix(window.location.href)
+  return isAllowedSuffix() && isWaffle()
 }
 
 function isAllowedSuffix (testCase) {
@@ -75,4 +75,11 @@ function isAllowedSuffix (testCase) {
   } else {
     return false
   }
+}
+
+function isWaffle () {
+  let urlSplit = window.location.href.split('/')
+  if (urlSplit.find((string) => { return string === 'waffle.io' })) {
+    return false
+  } return true
 }
