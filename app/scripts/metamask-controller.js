@@ -414,7 +414,10 @@ module.exports = class MetamaskController extends EventEmitter {
   // ensuring they are only ever available in the background process.
   clearSeedWordCache (cb) {
     this.configManager.setSeedWords(null)
-    cb(null, this.preferencesController.getSelectedAddress())
+    this.displayController.finishFirstTime()
+    .then(() => {
+      cb(null, this.preferencesController.getSelectedAddress())
+    })
   }
 
   finishFirstTime (cb) {

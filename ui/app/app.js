@@ -59,6 +59,7 @@ function mapStateToProps (state) {
     lastUnreadNotice: state.metamask.lastUnreadNotice,
     lostAccounts: state.metamask.lostAccounts,
     frequentRpcList: state.metamask.frequentRpcList || [],
+    firstTime: state.metamask.firstTime,
   }
 }
 
@@ -148,7 +149,7 @@ App.prototype.renderAppBar = function () {
               marginRight: '-72px',
             },
           }, [
-            h(NetworkIndicator, {
+            !props.firstTime && h(NetworkIndicator, {
               network: this.props.network,
               provider: this.props.provider,
               onClick: (event) => {
