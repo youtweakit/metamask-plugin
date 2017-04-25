@@ -6,7 +6,6 @@ const TESTNET_RPC = MetamaskConfig.network.testnet
 const MAINNET_RPC = MetamaskConfig.network.mainnet
 const MORDEN_RPC = MetamaskConfig.network.morden
 const KOVAN_RPC = MetamaskConfig.network.kovan
-const INFURANET_RPC = MetamaskConfig.network.infuranet
 const RINKEBY_RPC = MetamaskConfig.network.rinkeby
 
 /* The config-manager is a convenience object
@@ -155,9 +154,6 @@ ConfigManager.prototype.getCurrentRpcAddress = function () {
 
     case 'kovan':
       return KOVAN_RPC
-
-    case 'infuranet':
-      return INFURANET_RPC
 
     case 'rinkeby':
       return RINKEBY_RPC

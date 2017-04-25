@@ -191,6 +191,15 @@ hr.horizontal-line {
   border: 3px solid #690496;
 }
 
+.golden-square {
+  background: #EBB33F;
+}
+
+.hollow-circle {
+  border-radius: 10px;
+  border: 3px solid #3c5596;
+}
+
 .pending-dot {
   background: red;
   left: 14px;
