@@ -282,6 +282,33 @@ App.prototype.renderNetworkDropdown = function () {
     }),
 
     h(DropMenuItem, {
+      label: 'Oracles Dev Network',
+      closeMenu: () => this.setState({ isNetworkMenuOpen: false}),
+      action: () => props.dispatch(actions.setProviderType('oracles_dev')),
+      icon: h('.menu-icon.oracles'),
+      activeNetworkRender: props.network,
+      provider: props.provider,
+    }),
+
+    /*h(DropMenuItem, {
+      label: 'Oracles Test Network',
+      closeMenu: () => this.setState({ isNetworkMenuOpen: false}),
+      action: () => props.dispatch(actions.setProviderType('oracles_test')),
+      icon: h('.menu-icon.oracles'),
+      activeNetworkRender: props.network,
+      provider: props.provider,
+    }),
+
+    h(DropMenuItem, {
+      label: 'Oracles Prod Network',
+      closeMenu: () => this.setState({ isNetworkMenuOpen: false}),
+      action: () => props.dispatch(actions.setProviderType('oracles_prod')),
+      icon: h('.menu-icon.oracles'),
+      activeNetworkRender: props.network,
+      provider: props.provider,
+    }),*/
+
+    h(DropMenuItem, {
       label: 'Localhost 8545',
       closeMenu: () => this.setState({ isNetworkMenuOpen: false }),
       action: () => props.dispatch(actions.setDefaultRpcTarget(rpcList)),

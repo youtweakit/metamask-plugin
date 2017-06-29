@@ -86,13 +86,9 @@ ConfigScreen.prototype.render = function () {
               },
             }, 'Save'),
           ]),
-
           h('hr.horizontal-line'),
-
           currentConversionInformation(metamaskState, state),
-
           h('hr.horizontal-line'),
-
           h('div', {
             style: {
               marginTop: '20px',
@@ -114,7 +110,6 @@ ConfigScreen.prototype.render = function () {
               },
             }, 'Copy State Logs'),
           ]),
-
           h('hr.horizontal-line'),
 
           h('div', {
@@ -197,6 +192,21 @@ function currentProviderDisplay (metamaskState) {
     case 'rinkeby':
       title = 'Current Network'
       value = 'Rinkeby Test Network'
+      break
+
+    case 'oracles-dev':
+      title = 'Current Network'
+      value = 'Oracles Dev Network'
+      break
+
+    case 'oracles-test':
+      title = 'Current Network'
+      value = 'Oracles Test Network'
+      break
+
+    case 'oracles-prod':
+      title = 'Current Network'
+      value = 'Oracles Prod Network'
       break
 
     default:

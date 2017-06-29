@@ -195,6 +195,15 @@ hr.horizontal-line {
   background: #EBB33F;
 }
 
+.oracles {
+  background: url("/images/oracles-150.png");
+  background-size: contain;
+  width: 20px;
+  height: 20px !important;
+  margin-left: 8px !important;
+  margin-right: 7px !important;
+}
+
 .pending-dot {
   background: red;
   left: 14px;

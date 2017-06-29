@@ -7,6 +7,9 @@ const MAINNET_RPC = MetamaskConfig.network.mainnet
 const ROPSTEN_RPC = MetamaskConfig.network.ropsten
 const KOVAN_RPC = MetamaskConfig.network.kovan
 const RINKEBY_RPC = MetamaskConfig.network.rinkeby
+const ORACLES_DEV_RPC = MetamaskConfig.network.oracles_dev
+const ORACLES_TEST_RPC = MetamaskConfig.network.oracles_test
+const ORACLES_PROD_RPC = MetamaskConfig.network.oracles_prod
 
 /* The config-manager is a convenience object
  * wrapping a pojo-migrator.
@@ -154,8 +157,17 @@ ConfigManager.prototype.getCurrentRpcAddress = function () {
     case 'rinkeby':
       return RINKEBY_RPC
 
+    case 'oracles_dev':
+      return ORACLES_DEV_RPC
+
+    case 'oracles_test':
+      return ORACLES_TEST_RPC
+
+    case 'oracles_prod':
+      return ORACLES_PROD_RPC
+
     default:
-      return provider && provider.rpcTarget ? provider.rpcTarget : RINKEBY_RPC
+      return provider && provider.rpcTarget ? provider.rpcTarget : ORACLES_DEV_RPC
   }
 }
 

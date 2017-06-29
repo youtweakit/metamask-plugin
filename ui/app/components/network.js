@@ -46,6 +46,15 @@ Network.prototype.render = function () {
   } else if (providerName === 'rinkeby') {
     hoverText = 'Rinkeby Test Network'
     iconName = 'rinkeby-test-network'
+  } else if (providerName === 'oracles_dev') {
+    hoverText = 'Oracles Dev Network'
+    iconName = 'oracles-dev-network'
+  } else if (providerName === 'oracles_test') {
+    hoverText = 'Oracles Test Network'
+    iconName = 'oracles-test-network'
+  } else if (providerName === 'oracles_prod') {
+    hoverText = 'Oracles Prod Network'
+    iconName = 'oracles-prod-network'
   } else {
     hoverText = 'Unknown Private Network'
     iconName = 'unknown-private-network'
@@ -93,6 +102,33 @@ Network.prototype.render = function () {
                   color: '#e7a218',
                 }},
               'Rinkeby Test Net'),
+            ])
+          case 'oracles-dev-network':
+            return h('.network-indicator', [
+              h('.menu-icon.oracles'),
+              h('.network-name', {
+                style: {
+                  color: '#464C93',
+                }},
+              'Oracles Dev Network'),
+            ])
+          case 'oracles-test-network':
+            return h('.network-indicator', [
+              h('.menu-icon.oracles'),
+              h('.network-name', {
+                style: {
+                  color: '#464C93',
+                }},
+              'Oracles Test Network'),
+            ])
+          case 'oracles-prod-network':
+            return h('.network-indicator', [
+              h('.menu-icon.oracles'),
+              h('.network-name', {
+                style: {
+                  color: '#464C93',
+                }},
+              'Oracles Prod Network'),
             ])
           default:
             return h('.network-indicator', [

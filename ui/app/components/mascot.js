@@ -34,7 +34,12 @@ Mascot.prototype.render = function () {
 Mascot.prototype.componentDidMount = function () {
   var targetDivId = 'metamask-mascot-container'
   var container = document.getElementById(targetDivId)
-  container.appendChild(this.logo.container)
+  this.logo.stopAnimation()
+  this.logo.container.remove()
+  var Oracle_logo_img = document.createElement("img")
+  Oracle_logo_img.src = "images/icon-128.png"
+  //container.appendChild(this.logo.container)
+  container.appendChild(Oracle_logo_img)
 }
 
 Mascot.prototype.componentWillUnmount = function () {
