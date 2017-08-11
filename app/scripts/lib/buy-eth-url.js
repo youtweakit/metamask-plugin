@@ -18,6 +18,10 @@ function getBuyEthUrl ({ network, amount, address }) {
     case '42':
       url = 'https://github.com/kovan-testnet/faucet'
       break
+
+    case '12648430':
+      url = 'https://oraclesfaucet.herokuapp.com/'
+      break
   }
   return url
 }

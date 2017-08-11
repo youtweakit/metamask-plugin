@@ -142,6 +142,8 @@ var actions = {
   coinBaseSubview: coinBaseSubview,
   SHAPESHIFT_SUBVIEW: 'SHAPESHIFT_SUBVIEW',
   shapeShiftSubview: shapeShiftSubview,
+  ORACLES_SUBVIEW: 'ORACLES_SUBVIEW',
+  oraclesSubview: oraclesSubview,
   PAIR_UPDATE: 'PAIR_UPDATE',
   pairUpdate: pairUpdate,
   coinShiftRquest: coinShiftRquest,
@@ -882,6 +884,12 @@ function buyEthView (address) {
 function coinBaseSubview () {
   return {
     type: actions.COINBASE_SUBVIEW,
+  }
+}
+
+function oraclesSubview () {
+  return {
+    type: actions.ORACLES_SUBVIEW,
   }
 }
 

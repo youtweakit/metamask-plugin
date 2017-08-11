@@ -28,7 +28,7 @@ QUnit.test('render init screen', function (assert) {
   }).then(function() {
     // Scroll through terms
     var title = app.find('h1').text()
-    assert.equal(title, 'MetaMask', 'title screen')
+    assert.equal(title, 'Oracles', 'title screen')
 
     // enter password
     var pwBox = app.find('#password-box')[0]

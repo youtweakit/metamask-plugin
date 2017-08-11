@@ -33,14 +33,6 @@ UnlockScreen.prototype.render = function () {
           animationEventEmitter: this.animationEventEmitter,
         }),
 
-        h('h1', {
-          style: {
-            fontSize: '1.4em',
-            textTransform: 'uppercase',
-            color: '#7F8082',
-          },
-        }, 'MetaMask'),
-
         h('input.large-input', {
           type: 'password',
           id: 'password-box',

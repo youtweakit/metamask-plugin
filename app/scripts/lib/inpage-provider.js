@@ -15,7 +15,7 @@ function MetamaskInpageProvider (connectionStream) {
     connectionStream,
     multiStream,
     connectionStream,
-    (err) => logStreamDisconnectWarning('MetaMask', err)
+    (err) => logStreamDisconnectWarning('Oracles', err)
   )
 
   // subscribe to metamask public config (one-way)
@@ -23,7 +23,7 @@ function MetamaskInpageProvider (connectionStream) {
   pipe(
     multiStream.createStream('publicConfig'),
     self.publicConfigStore,
-    (err) => logStreamDisconnectWarning('MetaMask PublicConfigStore', err)
+    (err) => logStreamDisconnectWarning('Oracles PublicConfigStore', err)
   )
 
   // connect to async provider
@@ -32,7 +32,7 @@ function MetamaskInpageProvider (connectionStream) {
     asyncProvider,
     multiStream.createStream('provider'),
     asyncProvider,
-    (err) => logStreamDisconnectWarning('MetaMask RpcProvider', err)
+    (err) => logStreamDisconnectWarning('Oracles RpcProvider', err)
   )
   // start and stop polling to unblock first block lock
 

@@ -4,6 +4,7 @@ const inherits = require('util').inherits
 const connect = require('react-redux').connect
 const actions = require('../actions')
 const CoinbaseForm = require('./coinbase-form')
+const OraclesForm = require('./oracles-form')
 const ShapeshiftForm = require('./shapeshift-form')
 const Loading = require('./loading')
 const AccountPanel = require('./account-panel')
@@ -32,103 +33,171 @@ function BuyButtonSubview () {
 BuyButtonSubview.prototype.render = function () {
   const props = this.props
   const isLoading = props.isSubLoading
+  const network = this.props.network
 
-  return (
-    h('.buy-eth-section.flex-column', {
-      style: {
-        alignItems: 'center',
-      },
-    }, [
-             // back button
-      h('.flex-row', {
+  if (network === '12648430') {
+    return (
+      h('.buy-eth-section.flex-column', {
         style: {
           alignItems: 'center',
-          justifyContent: 'center',
         },
       }, [
-        h('i.fa.fa-arrow-left.fa-lg.cursor-pointer.color-orange', {
-          onClick: this.backButtonContext.bind(this),
+               // back button
+        h('.flex-row', {
+          style: {
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        }, [
+          h('i.fa.fa-arrow-left.fa-lg.cursor-pointer.color-orange', {
+            onClick: this.backButtonContext.bind(this),
+            style: {
+              position: 'absolute',
+              left: '10px',
+            },
+          }),
+          h('h2.text-transform-uppercase.flex-center', {
+            style: {
+              width: '100vw',
+              background: 'rgb(235, 235, 235)',
+              color: 'rgb(174, 174, 174)',
+              paddingTop: '4px',
+              paddingBottom: '4px',
+            },
+          }, 'Buy Eth'),
+        ]),
+        h('div', {
           style: {
             position: 'absolute',
-            left: '10px',
+            top: '57vh',
+            left: '49vw',
           },
-        }),
-        h('h2.text-transform-uppercase.flex-center', {
+        }, [
+          h(Loading, {isLoading}),
+        ]),
+        h('div', {
           style: {
+            width: '80%',
+          },
+        }, [
+          h(AccountPanel, {
+            showFullAddress: true,
+            identity: props.identity,
+            account: props.account,
+          }),
+        ]),
+        h('h3.text-transform-uppercase', {
+          style: {
+            paddingLeft: '15px',
+            fontFamily: 'Montserrat Light',
             width: '100vw',
             background: 'rgb(235, 235, 235)',
             color: 'rgb(174, 174, 174)',
             paddingTop: '4px',
             paddingBottom: '4px',
           },
-        }, 'Buy Eth'),
-      ]),
-      h('div', {
+        }, "Get test coins on Oracles Dev Network faucet"),
+        this.formVersionSubview(),
+      ])
+    );
+  } else {
+    return (
+      h('.buy-eth-section.flex-column', {
         style: {
-          position: 'absolute',
-          top: '57vh',
-          left: '49vw',
+          alignItems: 'center',
         },
       }, [
-        h(Loading, {isLoading}),
-      ]),
-      h('div', {
-        style: {
-          width: '80%',
-        },
-      }, [
-        h(AccountPanel, {
-          showFullAddress: true,
-          identity: props.identity,
-          account: props.account,
-        }),
-      ]),
-      h('h3.text-transform-uppercase', {
-        style: {
-          paddingLeft: '15px',
-          fontFamily: 'Montserrat Light',
-          width: '100vw',
-          background: 'rgb(235, 235, 235)',
-          color: 'rgb(174, 174, 174)',
-          paddingTop: '4px',
-          paddingBottom: '4px',
-        },
-      }, 'Select Service'),
-      h('.flex-row.selected-exchange', {
-        style: {
-          position: 'relative',
-          right: '35px',
-          marginTop: '20px',
-          marginBottom: '20px',
-        },
-      }, [
-        h(RadioList, {
-          defaultFocus: props.buyView.subview,
-          labels: [
-            'Coinbase',
-            'ShapeShift',
-          ],
-          subtext: {
-            'Coinbase': 'Crypto/FIAT (USA only)',
-            'ShapeShift': 'Crypto',
+               // back button
+        h('.flex-row', {
+          style: {
+            alignItems: 'center',
+            justifyContent: 'center',
           },
-          onClick: this.radioHandler.bind(this),
-        }),
-      ]),
-      h('h3.text-transform-uppercase', {
-        style: {
-          paddingLeft: '15px',
-          fontFamily: 'Montserrat Light',
-          width: '100vw',
-          background: 'rgb(235, 235, 235)',
-          color: 'rgb(174, 174, 174)',
-          paddingTop: '4px',
-          paddingBottom: '4px',
-        },
-      }, props.buyView.subview),
-      this.formVersionSubview(),
-    ])
-  )
+        }, [
+          h('i.fa.fa-arrow-left.fa-lg.cursor-pointer.color-orange', {
+            onClick: this.backButtonContext.bind(this),
+            style: {
+              position: 'absolute',
+              left: '10px',
+            },
+          }),
+          h('h2.text-transform-uppercase.flex-center', {
+            style: {
+              width: '100vw',
+              background: 'rgb(235, 235, 235)',
+              color: 'rgb(174, 174, 174)',
+              paddingTop: '4px',
+              paddingBottom: '4px',
+            },
+          }, 'Buy Eth'),
+        ]),
+        h('div', {
+          style: {
+            position: 'absolute',
+            top: '57vh',
+            left: '49vw',
+          },
+        }, [
+          h(Loading, {isLoading}),
+        ]),
+        h('div', {
+          style: {
+            width: '80%',
+          },
+        }, [
+          h(AccountPanel, {
+            showFullAddress: true,
+            identity: props.identity,
+            account: props.account,
+          }),
+        ]),
+        h('h3.text-transform-uppercase', {
+          style: {
+            paddingLeft: '15px',
+            fontFamily: 'Montserrat Light',
+            width: '100vw',
+            background: 'rgb(235, 235, 235)',
+            color: 'rgb(174, 174, 174)',
+            paddingTop: '4px',
+            paddingBottom: '4px',
+          },
+        }, 'Select Service'),
+        h('.flex-row.selected-exchange', {
+          style: {
+            position: 'relative',
+            right: '35px',
+            marginTop: '20px',
+            marginBottom: '20px',
+          },
+        }, [
+          h(RadioList, {
+            defaultFocus: props.buyView.subview,
+            labels: [
+              'Coinbase',
+              'ShapeShift',
+            ],
+            subtext: {
+              'Coinbase': 'Crypto/FIAT (USA only)',
+              'ShapeShift': 'Crypto',
+            },
+            onClick: this.radioHandler.bind(this),
+          }),
+        ]),
+        h('h3.text-transform-uppercase', {
+          style: {
+            paddingLeft: '15px',
+            fontFamily: 'Montserrat Light',
+            width: '100vw',
+            background: 'rgb(235, 235, 235)',
+            color: 'rgb(174, 174, 174)',
+            paddingTop: '4px',
+            paddingBottom: '4px',
+          },
+        }, props.buyView.subview),
+        this.formVersionSubview(),
+      ])
+    )
+  }
 }
 
 BuyButtonSubview.prototype.formVersionSubview = function () {
@@ -139,6 +208,8 @@ BuyButtonSubview.prototype.formVersionSubview = function () {
     } else if (this.props.buyView.formView.shapeshift) {
       return h(ShapeshiftForm, this.props)
     }
+  } else if (network === '12648430') {
+    return h(OraclesForm, this.props)
   } else {
     return h('div.flex-column', {
       style: {

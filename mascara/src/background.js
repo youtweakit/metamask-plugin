@@ -116,7 +116,7 @@ function setupController (initState, client) {
     var isMetaMaskInternalProcess = (context === 'popup')
     if (isMetaMaskInternalProcess) {
       // communication with popup
-      controller.setupTrustedCommunication(connectionStream, 'MetaMask')
+      controller.setupTrustedCommunication(connectionStream, 'Oracles')
       popupIsOpen = true
     } else {
       // communication with page

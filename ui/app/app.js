@@ -174,7 +174,7 @@ App.prototype.renderAppBar = function () {
             position: 'relative',
             left: '9px',
           },
-        }, 'MetaMask'),
+        }, 'Oracles'),
 
         props.isUnlocked && h('div', {
           style: {

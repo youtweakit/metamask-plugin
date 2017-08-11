@@ -42,7 +42,7 @@ InfoScreen.prototype.render = function () {
           // current version number
 
           h('.info.info-gray', [
-            h('div', 'Metamask'),
+            h('div', 'Oracles'),
             h('div', {
               style: {
                 marginBottom: '10px',
@@ -50,7 +50,7 @@ InfoScreen.prototype.render = function () {
             }, `Version: ${version}`),
           ]),
 
-          h('div', {
+          /*h('div', {
             style: {
               marginBottom: '5px',
             }},
@@ -83,7 +83,7 @@ InfoScreen.prototype.render = function () {
                 ]),
               ]),
             ]
-          ),
+          ),*/
 
           h('hr', {
             style: {
@@ -99,13 +99,13 @@ InfoScreen.prototype.render = function () {
             [
               h('div.fa.fa-github', [
                 h('a.info', {
-                  href: 'https://github.com/MetaMask/faq',
+                  href: 'https://github.com/oraclesorg/oracles-wiki',
                   target: '_blank',
                 }, 'Need Help? Read our FAQ!'),
               ]),
               h('div', [
                 h('a', {
-                  href: 'https://metamask.io/',
+                  href: 'https://www.oracles.org/',
                   target: '_blank',
                 }, [
                   h('img.icon-size', {
@@ -120,25 +120,25 @@ InfoScreen.prototype.render = function () {
                   h('div.info', 'Visit our web site'),
                 ]),
               ]),
-              h('div.fa.fa-slack', [
+              /*h('div.fa.fa-slack', [
                 h('a.info', {
                   href: 'http://slack.metamask.io',
                   target: '_blank',
                 }, 'Join the conversation on Slack'),
-              ]),
+              ]),*/
 
-              h('div.fa.fa-twitter', [
+              /*h('div.fa.fa-twitter', [
                 h('a.info', {
                   href: 'https://twitter.com/metamask_io',
                   target: '_blank',
                 }, 'Follow us on Twitter'),
-              ]),
+              ]),*/
 
               h('div.fa.fa-envelope', [
                 h('a.info', {
                   target: '_blank',
                   style: { width: '85vw' },
-                  href: 'mailto:help@metamask.io?subject=Feedback',
+                  href: 'mailto:hello@oracles.org?subject=Feedback',
                 }, 'Email us!'),
               ]),
             ]),

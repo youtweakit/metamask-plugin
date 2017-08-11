@@ -34,7 +34,7 @@ initialize().catch(console.error)
 async function initialize () {
   const initState = await loadStateFromPersistence()
   await setupController(initState)
-  console.log('MetaMask initialization complete.')
+  console.log('Oracles initialization complete.')
 }
 
 //
@@ -56,7 +56,7 @@ async function loadStateFromPersistence () {
 
 function setupController (initState) {
   //
-  // MetaMask Controller
+  // Oracles Controller
   //
 
   const controller = new MetamaskController({
@@ -95,7 +95,7 @@ function setupController (initState) {
     if (isMetaMaskInternalProcess) {
       // communication with popup
       popupIsOpen = popupIsOpen || (remotePort.name === 'popup')
-      controller.setupTrustedCommunication(portStream, 'MetaMask', remotePort.name)
+      controller.setupTrustedCommunication(portStream, 'Oracles', remotePort.name)
       // record popup as closed
       if (remotePort.name === 'popup') {
         endOfStream(portStream, () => {
@@ -144,9 +144,9 @@ function triggerUi () {
   if (!popupIsOpen) notificationManager.showPopup()
 }
 
-// On first install, open a window to MetaMask website to how-it-works.
+// On first install, open a window to Oracles website to how-it-works.
 extension.runtime.onInstalled.addListener(function (details) {
   if ((details.reason === 'install') && (!METAMASK_DEBUG)) {
-    extension.tabs.create({url: 'https://metamask.io/#how-it-works'})
+    extension.tabs.create({url: 'https://github.com/oraclesorg/oracles-wiki'})
   }
 })
